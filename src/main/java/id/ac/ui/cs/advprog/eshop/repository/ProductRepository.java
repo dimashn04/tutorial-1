@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
 
