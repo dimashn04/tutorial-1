@@ -20,4 +20,21 @@ public class ProductRepository {
     public Iterator<Product> findAll() {
         return productData.iterator();
     }
+
+    public Product findById(String productId) {
+        return productData.stream()
+                .filter(product -> product.getProductId().equals(productId))
+                .findFirst()
+                .orElseThrow(() -> 
+                    new IllegalArgumentException("Invalid product Id:" + productId)
+                );
+    }
+
+    public Product edit(Product editedProduct) {
+        String productId = editedProduct.getProductId();
+        Product existingProduct = findById(productId);
+        int indexOfProduct = productData.indexOf(existingProduct);
+        productData.set(indexOfProduct, editedProduct);
+        return editedProduct;
+    }
 }
