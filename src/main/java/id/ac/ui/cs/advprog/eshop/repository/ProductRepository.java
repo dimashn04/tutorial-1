@@ -37,4 +37,10 @@ public class ProductRepository {
         productData.set(indexOfProduct, editedProduct);
         return editedProduct;
     }
+
+    public Product delete(String productId) {
+        Product product = findById(productId);
+        productData.remove(product);
+        return product;
+    }
 }
