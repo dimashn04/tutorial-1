@@ -23,11 +23,11 @@ public class ProductRepository {
 
     public Product findById(String productId) {
         return productData.stream()
-                .filter(product -> product.getProductId().equals(productId))
-                .findFirst()
-                .orElseThrow(() -> 
-                    new IllegalArgumentException("Invalid product Id:" + productId)
-                );
+            .filter(product -> product.getProductId().equals(productId))
+            .findFirst()
+            .orElseThrow(() -> 
+                new IllegalArgumentException("Invalid product Id:" + productId)
+            );
     }
 
     public Product edit(Product editedProduct) {
