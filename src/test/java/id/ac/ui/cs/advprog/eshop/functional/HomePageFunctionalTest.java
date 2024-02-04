@@ -20,7 +20,7 @@ public class HomePageFunctionalTest {
     @LocalServerPort
     private int serverPort;
 
-    @Value("{app.baseUrl:http://localhost}")
+    @Value("${app.baseUrl:http://localhost}")
     private String testBaseUrl;
 
     private String baseUrl;
