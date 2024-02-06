@@ -17,8 +17,12 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${product.productName}"></h5>
                     <p class="card-text">Quantity: <span th:text="${product.productQuantity}"></span></p>
-                    <a th:href="@{/product/edit/{id}(id=${product.productId})}" class="btn btn-warning btn-sm">Edit</a>
-                    <a th:href="@{/product/delete/{id}(id=${product.productId})}" class="btn btn-danger btn-sm">Delete</a>
+                    <div class="btn-group" role="group">
+                        <a th:href="@{/product/edit/{id}(id=${product.productId})}" class="btn btn-warning btn-sm rounded">Edit</a>
+                        <form style="padding-left: 5px;" th:action="@{/product/delete/{id}(id=${product.productId})}" th:object="${product}" th:method="delete">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
