@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
@@ -47,15 +48,17 @@ public class ProductController {
         return "editProduct";
     }
 
-    @PostMapping("/edit")
-    public String editProductPost(@ModelAttribute Product product, Model model){
-        service.editProduct(product);
-        return "redirect:list";
-    }
-
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") String id, Model model) {
         service.deleteProduct(id);
+        return "redirect:../list";
+    }
+
+    @PutMapping(value = "/edit/{id}")
+    public String editProduct(@PathVariable("id") String id, @ModelAttribute Product product, Model model) {
+        // Set the ID to the edited product, because every new instance product will be assigned a new UUID
+        product.setProductId(id);
+        service.editProduct(product);
         return "redirect:../list";
     }
 }
