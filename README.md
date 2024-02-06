@@ -20,6 +20,7 @@ Mistakes I've made while making this assignment:
   Solution: I forgot to put '$' in the @Value  
 - Edit product request seems to keep doing GET instead of POST:  
   Solution: Instead of specifying the Product ID in the URL, I put the Product ID inside a hidden input form field (Not secured but I have not find a better way yet)  
+  Update: Fixed delete and edit to use correct request methods  
 
 Things I found on the internet that might help in the future:
 - https://www.baeldung.com/spring-boot-crud-thymeleaf  
