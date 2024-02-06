@@ -70,7 +70,7 @@ public class CreateProductFunctionalTest {
     void deleteAll(ChromeDriver driver) {
         driver.get(baseUrl + "/product/list");
         for (WebElement deleteButton : 
-            driver.findElements(By.linkText("Delete"))) {
+            driver.findElements(By.xpath("//button[text()='Delete']"))) {
             deleteButton.click();
         }
     }
@@ -104,7 +104,7 @@ public class CreateProductFunctionalTest {
         clickHyperlink(driver, "Create Product");
         fillForm(driver, "Sample Product for Delete", 100);
         clickButton(driver, "Submit");
-        clickHyperlink(driver, "Delete");
+        clickButton(driver, "Delete");
         assertEquals(0, driver.findElements(
             By.xpath("//div[@class='card-body']"))
             .size());
