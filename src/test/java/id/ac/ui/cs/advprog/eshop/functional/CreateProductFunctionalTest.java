@@ -31,36 +31,82 @@ public class CreateProductFunctionalTest {
         baseUrl = String.format("%s:%d", testBaseUrl, serverPort);
     }
 
-    @Test
-    void createProduct_isCorrect(ChromeDriver driver) throws Exception {
-        driver.get(baseUrl + "/product/list");
-        
-        WebElement createProductButton = driver.findElement(
-            By.linkText("Create Product"));
-        createProductButton.click();
-
+    void fillForm(ChromeDriver driver, String name, int quantity) {
         WebElement productNameInput = driver.findElement(
             By.id("nameInput"));
         productNameInput.clear();
-        productNameInput.sendKeys("Sample Product");
+        productNameInput.sendKeys(name);
 
         WebElement productQuantityInput = driver.findElement(
             By.id("quantityInput"));
         productQuantityInput.clear();
-        productQuantityInput.sendKeys("100");
+        productQuantityInput.sendKeys(String.valueOf(quantity));
+    }
 
-        WebElement submitButton = driver.findElement(
-            By.xpath("//button[text()='Submit']"));
-        submitButton.click();
-
+    void compareProduct(ChromeDriver driver, String expectedName, int expectedQuantity) {
         WebElement productNameInCard = driver.findElement(
             By.xpath("//div[@class='card-body']/h5[@class='card-title']"));
         String actualProductName = productNameInCard.getText();
-        assertEquals("Sample Product", actualProductName);
+        assertEquals(expectedName, actualProductName);
 
         WebElement productQuantityInCard = driver.findElement(
             By.xpath("//div[@class='card-body']/p[contains(text(),'Quantity:')]/span"));
         String actualProductQuantity = productQuantityInCard.getText();
-        assertEquals("100", actualProductQuantity);
+        assertEquals(String.valueOf(expectedQuantity), actualProductQuantity);
+    }
+
+    void clickHyperlink(ChromeDriver driver, String linkText) {
+        WebElement createProductButton = driver.findElement(
+            By.linkText(linkText));
+        createProductButton.click();
+    }
+
+    void clickButton(ChromeDriver driver, String buttonText) {
+        WebElement button = driver.findElement(
+            By.xpath("//button[text()='" + buttonText + "']"));
+        button.click();
+    }
+
+    void deleteAll(ChromeDriver driver) {
+        driver.get(baseUrl + "/product/list");
+        for (WebElement deleteButton : 
+            driver.findElements(By.linkText("Delete"))) {
+            deleteButton.click();
+        }
+    }
+
+    @Test
+    void createProduct_isCorrect(ChromeDriver driver) throws Exception {
+        driver.get(baseUrl + "/product/list");
+        clickHyperlink(driver, "Create Product");
+        fillForm(driver, "Sample Product", 100);
+        clickButton(driver, "Submit");
+        compareProduct(driver, "Sample Product", 100);
+        deleteAll(driver);
+    }
+
+    @Test
+    void editProduct_isCorrect(ChromeDriver driver) throws Exception {
+        driver.get(baseUrl + "/product/list");
+        clickHyperlink(driver, "Create Product");
+        fillForm(driver, "Sample Product for Edit", 100);
+        clickButton(driver, "Submit");
+        clickHyperlink(driver, "Edit");
+        fillForm(driver, "Edited Product", 200);
+        clickButton(driver, "Edit Product");
+        compareProduct(driver, "Edited Product", 200);
+        deleteAll(driver);
+    }
+
+    @Test
+    void deleteProduct_isCorrect(ChromeDriver driver) throws Exception {
+        driver.get(baseUrl + "/product/list");
+        clickHyperlink(driver, "Create Product");
+        fillForm(driver, "Sample Product for Delete", 100);
+        clickButton(driver, "Submit");
+        clickHyperlink(driver, "Delete");
+        assertEquals(0, driver.findElements(
+            By.xpath("//div[@class='card-body']"))
+            .size());
     }
 }
