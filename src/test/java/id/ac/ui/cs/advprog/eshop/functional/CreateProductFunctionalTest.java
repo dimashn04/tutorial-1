@@ -53,14 +53,14 @@ public class CreateProductFunctionalTest {
             By.xpath("//button[text()='Submit']"));
         submitButton.click();
 
-        WebElement productNameInTable = driver.findElement(
-            By.xpath("//tr[last()]/td[1]"));
-        String actualProductName = productNameInTable.getText();
+        WebElement productNameInCard = driver.findElement(
+            By.xpath("//div[@class='card-body']/h5[@class='card-title']"));
+        String actualProductName = productNameInCard.getText();
         assertEquals("Sample Product", actualProductName);
 
-        WebElement productQuantityInTable = driver.findElement(
-            By.xpath("//tr[last()]/td[2]"));
-        String actualProductQuantity = productQuantityInTable.getText();
+        WebElement productQuantityInCard = driver.findElement(
+            By.xpath("//div[@class='card-body']/p[contains(text(),'Quantity:')]/span"));
+        String actualProductQuantity = productQuantityInCard.getText();
         assertEquals("100", actualProductQuantity);
     }
 }
