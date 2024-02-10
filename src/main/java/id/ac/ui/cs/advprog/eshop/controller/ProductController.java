@@ -55,7 +55,7 @@ public class ProductController {
         return "redirect:../list";
     }
 
-    @PutMapping(value = "/edit/{id}")
+    @PutMapping("/edit/{id}")
     public String editProduct(@PathVariable("id") String id, @ModelAttribute Product product, Model model) {
         // Set the ID to the edited product, because every new instance product will be assigned a new UUID
         product.setProductId(id);
