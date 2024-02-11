@@ -33,3 +33,18 @@ Things I found on the internet that might help in the future:
 2. Suppose that after writing the CreateProductFunctionalTest.java along with the corresponding test case, you were asked to create another functional test suite that verifies the number of items in the product list. You decided to create a new Java class similar to the prior functional test suites with the same setup procedures and instance variables.  
 What do you think about the cleanliness of the code of the new functional test suite? Will the new code reduce the code quality? Identify the potential clean code issues, explain the reasons, and suggest possible improvements to make the code cleaner!  
    In my opinion, the code would be less clean. The reason is that the functional tests to check the product details & how many products are in the list is not that much different. Therefore, there will be to many repeated codes. The solution is to combine the two classes into one and make a method for the same lines of code.  
+
+# Tutorial 2  
+**Reflection**  
+You have implemented a CI/CD process that automatically runs the test suites, analyzes code quality, and deploys to a PaaS. Try to answer the following questions in order to reflect on your attempt completing the tutorial and exercise.  
+1. List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.  
+   1. "Avoid the use of value in annotations when its the only element" issue by PMD  
+      Solution: Instead of ```@PutMapping(value = "/edit/{id}")```, use ```@PutMapping("/edit/{id}")```  
+   2. "The instance method name 'HomePage' doesn't match '[a-z][a-zA-Z0-9]*'" issue by PMD  
+      Solution: Use camel case for method names  
+   3. "Unnecessary modifier 'public' on method '...': the method is declared in an interface type" issue by PMD  
+      Solution: Remove public modifier on interface methods  
+   4. "This utility class has a non-private constructor" issue by PMD  
+      Solution: This should be dismissed since if we put a private constructor in the EshopApplication class, the program won't start (false-positive)  
+2. Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!  
+   Continuous Integration comprises the Code and Test phases. Continuous Delivery/Deployment comprises the Review and Operational phases. My current project has implemented CI/CD. The code in the ci.yml workflow will automate test processes when I pull, push, merge to the my repo. For the deployment, Koyeb also implemented some CI/CD to automate deployment process everytime there's pull, push, merge from the repo.
