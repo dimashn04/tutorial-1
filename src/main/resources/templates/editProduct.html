@@ -2,15 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create New Product</title>
+    <title>Edit Product</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERd`knLPMO" crossorigin="anonymous">
 </head>
 <body>
 
 <div class="container">
-    <h3>Create New Product</h3>
+    <h3>Edit Product</h3>
 
-    <form th:action="@{/product/create}" th:object="${product}" method="post">
+    <form th:action="@{/product/edit/{id}(id=${product.productId})}" th:object="${product}" th:method="put">
         <div class="form-group">
             <label for="nameInput">Name</label>
             <input th:field="*{productName}" type="text" class="form-control mb-4 col-4" id="nameInput" placeholder="Enter product' name">
@@ -19,7 +19,7 @@
             <label for="quantityInput">Quantity</label>
             <input th:field="*{productQuantity}" type="text" class="form-control mb-4 col-4" id="quantityInput" placeholder="Enter product' name">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Edit Product</button>
     </form>
 </div>
 
