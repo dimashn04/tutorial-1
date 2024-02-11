@@ -20,6 +20,6 @@ public class HomePageControllerTest {
     void testHomePage() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/"))
                .andExpect(MockMvcResultMatchers.status().isOk())
-               .andExpect(MockMvcResultMatchers.view().name("HomePage"));
+               .andExpect(MockMvcResultMatchers.view().name("homePage"));
     }
 }
