@@ -47,4 +47,7 @@ You have implemented a CI/CD process that automatically runs the test suites, an
    4. "This utility class has a non-private constructor" issue by PMD  
       Solution: This should be dismissed since if we put a private constructor in the EshopApplication class, the program won't start (false-positive)  
 2. Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!  
-   Continuous Integration comprises the Code and Test phases. Continuous Delivery/Deployment comprises the Review and Operational phases. My current project has implemented CI/CD. The code in the ci.yml workflow will automate test processes when I pull, push, merge to the my repo. For the deployment, Koyeb also implemented some CI/CD to automate deployment process everytime there's pull, push, merge from the repo.
+   Continuous Integration comprises the Code and Test phases. Continuous Delivery/Deployment comprises the Review and Operational phases. My current project has implemented CI/CD. The code in the ci.yml workflow will automate test processes when I pull, push, merge to the my repo. For the deployment, Koyeb also implemented some CI/CD to automate deployment process everytime there's pull, push, merge from the repo.  
+
+100% Code Coverage Proof:  
+![](Screenshot%202024-02-14%20152921.png)
