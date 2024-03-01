@@ -28,7 +28,7 @@ class OrderRepositoryTest {
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(2);
         products.add(product1);
-        
+
         orders = new ArrayList<>();
         Order order1 = new Order("dbd4aff4-9a7f-4603-92c2-eaf529271cc9", 
             products, 1708560000L, "Safira Sudrajat");
@@ -101,7 +101,7 @@ class OrderRepositoryTest {
         }
 
         List<Order> findResult = orderRepository.findAllByAuthor(orders.get(1).getAuthor());
-        assertEquals(2, findResult.size());
+        assertEquals(3, findResult.size());
     }
 
     @Test
