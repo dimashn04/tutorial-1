@@ -77,8 +77,8 @@ class OrderTest {
     void testSetStatusToCancelled() {
         Order order = new Order("dbd4aff4-9a7f-4603-92c2-eaf529271cc9", 
             this.products, 1708560000L, "Safira Sudrajat");
-        order.setStatus("CANCELLED");
-        assertEquals("CANCELLED", order.getStatus());
+        order.setStatus("CANCELED");
+        assertEquals("CANCELED", order.getStatus());
     }
 
     @Test
