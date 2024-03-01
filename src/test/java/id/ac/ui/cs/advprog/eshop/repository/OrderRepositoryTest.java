@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Or;
 
 import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
 import id.ac.ui.cs.advprog.eshop.model.Order;
@@ -28,8 +27,8 @@ class OrderRepositoryTest {
         product1.setProductId("e45d7d21-fd29-4533-a569-abbe0819579a");
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(2);
-        product1.setProductQuantity(2);
-
+        products.add(product1);
+        
         orders = new ArrayList<>();
         Order order1 = new Order("dbd4aff4-9a7f-4603-92c2-eaf529271cc9", 
             products, 1708560000L, "Safira Sudrajat");
