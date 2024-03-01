@@ -7,10 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.catalina.servlets.DefaultServlet.SortManager.Order;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Or;
 
 class OrderTest {
     private List<Product> products;
@@ -37,7 +35,8 @@ class OrderTest {
         this.products.clear();
 
         assertThrows(IllegalArgumentException.class, () -> {
-           Order order = new Order("dbd4aff4-9a7f-4603-92c2-eaf529271cc9", 
+           @SuppressWarnings("unused")
+            Order order = new Order("dbd4aff4-9a7f-4603-92c2-eaf529271cc9", 
                 this.products, 1708560000L, "Safira Sudrajat");
         });
     }
@@ -52,7 +51,7 @@ class OrderTest {
         assertEquals("Sampo Cap Bambang", order.getProducts().get(0).getProductName());
         assertEquals("Sabun Cap Usep", order.getProducts().get(1).getProductName());
 
-        assertEquals("dbd4aff4-9a7f-4603-92c2-eaf529271cc9", order.getOrderId());
+        assertEquals("dbd4aff4-9a7f-4603-92c2-eaf529271cc9", order.getId());
         assertEquals(1708560000L, order.getOrderTime());
         assertEquals("Safira Sudrajat", order.getAuthor());
         assertEquals("WAITING_PAYMENT", order.getStatus());
@@ -68,6 +67,7 @@ class OrderTest {
     @Test
     void testCreateOrderInvalidStatus() {
         assertThrows(IllegalArgumentException.class, () -> {
+            @SuppressWarnings("unused")
             Order order = new Order("dbd4aff4-9a7f-4603-92c2-eaf529271cc9", 
                 this.products, 1708560000L, "Safira Sudrajat", "MEOW");
         });
