@@ -252,4 +252,60 @@ class VoucherPaymentTest {
             );
         });
     }
+
+    @Test
+    void testCreateVoucherPaymentWithInvalidVoucherCodeBecauseMoreThan16Length() {
+        paymentData.put("voucherCode", "ESHOP1234ABCD5679");
+        assertThrows(IllegalArgumentException.class, () -> {
+            @SuppressWarnings("unused")
+            Payment payment = new VoucherPayment(
+                "e45d7d21-fd29-4533-a569-abbe0819579a", 
+                PaymentMethod.VOUCHER.getValue(), 
+                order, 
+                paymentData
+            );
+        });
+    }
+
+    @Test
+    void testCreateVoucherPaymentWithInvalidVoucherCodeBecauseNotStartWithESHOP() {
+        paymentData.put("voucherCode", "XSHOP1234ABCD5679");
+        assertThrows(IllegalArgumentException.class, () -> {
+            @SuppressWarnings("unused")
+            Payment payment = new VoucherPayment(
+                "e45d7d21-fd29-4533-a569-abbe0819579a", 
+                PaymentMethod.VOUCHER.getValue(), 
+                order, 
+                paymentData
+            );
+        });
+    }
+
+    @Test
+    void testCreateVoucherPaymentWithInvalidVoucherCodeBecauseNot8Numerics() {
+        paymentData.put("voucherCode", "ESHOP1234ABCD567X");
+        assertThrows(IllegalArgumentException.class, () -> {
+            @SuppressWarnings("unused")
+            Payment payment = new VoucherPayment(
+                "e45d7d21-fd29-4533-a569-abbe0819579a", 
+                PaymentMethod.VOUCHER.getValue(), 
+                order, 
+                paymentData
+            );
+        });
+    }
+
+    @Test
+    void testCreateVoucherPaymentWithInvalidVoucherCodeBecauseLessThan16Length() {
+        paymentData.put("voucherCode", "ESHOP1234ABCD567");
+        assertThrows(IllegalArgumentException.class, () -> {
+            @SuppressWarnings("unused")
+            Payment payment = new VoucherPayment(
+                "e45d7d21-fd29-4533-a569-abbe0819579a", 
+                PaymentMethod.VOUCHER.getValue(), 
+                order, 
+                paymentData
+            );
+        });
+    }
 }
