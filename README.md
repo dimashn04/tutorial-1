@@ -81,16 +81,16 @@ Apply the SOLID principles you have learned. You are allowed to modify the sourc
 # Tutorial 4  
 **Reflection**  
 1. Reflect based on Percival (2017) proposed self-reflective questions (in “Principles and Best Practice of Testing” submodule, chapter “Evaluating Your Testing Objectives”), whether this TDD flow is useful enough for you or not. If not, explain things that you need to do next time you make more tests.  
-- Correctness:  
-   1. Do I have enough functional tests to reassure myself that my application really works, from point of view of the user? Yes  
-   2. Am I testing all edge cases thoroughly? Yes  
-   3. Do I have tests that check whether all my components fit together properly? Could some integrated tests do this, or are functional tests enough? Yes. Functional tests are enough but with integrated tests it could be more thoroughly checked.  
-- Maintainability:  
-   1. Are my tests giving me the confidence to refactor my code, fearlessly and frequently? Yes  
-   2. Are my tests helping me to drive out a good design? If I have a lot of integration tests but less unit tests, do I need to make more unit tests to get better feedback on my code design? Yes. Depends, if I feel like that unit tests count are not enough, then I would add more. Same goes for integration tests.  
-- Production workflow:  
-   1. Are my feedback cycles as fast as I would like them? When do I get warned about bugs, and is there any practical way to make that happen sooner? Yes. As of now, it already satifies me, so I won't try to change things yet.  
-   2. Is there some way that I could write faster integration tests that would give me feedback quicker? Regularly review and refactor tests.  
-   3. Can I run a subset of the full test suite when I need to? Yes  
-   4. Am I spending to much time waiting for tests to run, and thus less time in a productive flow state? No  
+   - Correctness:  
+      1. Do I have enough functional tests to reassure myself that my application really works, from point of view of the user? Yes  
+      2. Am I testing all edge cases thoroughly? Yes  
+      3. Do I have tests that check whether all my components fit together properly? Could some integrated tests do this, or are functional tests enough? Yes. Functional tests are enough but with integrated tests it could be more thoroughly checked.  
+   - Maintainability:  
+      1. Are my tests giving me the confidence to refactor my code, fearlessly and frequently? Yes  
+      2. Are my tests helping me to drive out a good design? If I have a lot of integration tests but less unit tests, do I need to make more unit tests to get better feedback on my code design? Yes. Depends, if I feel like that unit tests count are not enough, then I would add more. Same goes for integration tests.  
+   - Production workflow:  
+      1. Are my feedback cycles as fast as I would like them? When do I get warned about bugs, and is there any practical way to make that happen sooner? Yes. As of now, it already satifies me, so I won't try to change things yet.  
+      2. Is there some way that I could write faster integration tests that would give me feedback quicker? Regularly review and refactor tests.  
+      3. Can I run a subset of the full test suite when I need to? Yes  
+      4. Am I spending to much time waiting for tests to run, and thus less time in a productive flow state? No  
 
