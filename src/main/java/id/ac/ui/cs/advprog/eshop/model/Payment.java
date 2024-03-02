@@ -16,41 +16,16 @@ public class Payment {
     Map<String, String> paymentData;
     String status;
 
-    public Payment(String id, String method, Order order, Map<String, String> paymentData) {
+    public Payment(String id, String method, Order order, Map<String, String> paymentData, String status) {
         this.id = id;
         this.method = method;
-        this.order = order;
-        this.paymentData = paymentData;
-        this.status = "WAITING_PAYMENT";
-
-        if (order == null) {
-            throw new IllegalArgumentException("Order must not be null");
-        }
-
-        if (paymentData == null || paymentData.isEmpty()) {
-            throw new IllegalArgumentException("Payment data must not be null or empty");
-        }
-
-        if (method == null || method.isEmpty()) {
-            throw new IllegalArgumentException("Payment method must not be null or empty");
-        }
-
-        if (!PaymentMethod.contains(method)) {
-            throw new IllegalArgumentException("Invalid payment method");
-        }
-
-        if (method == PaymentMethod.VOUCHER.getValue() && !paymentData.containsKey("voucherCode")) {
-            throw new IllegalArgumentException("Voucher code must be provided for voucher payment");
-        }
-
-        if (method == PaymentMethod.BANK.getValue() && (!paymentData.containsKey("bankName") || !paymentData.containsKey("referenceCode"))) {
-            throw new IllegalArgumentException("Bank name and reference code must be provided for bank payment");
-        }
+        this.setOrder(order);
+        this.setPaymentData(paymentData);
+        this.setStatus(status);
     }
 
-    public Payment(String id, String method, Order order, Map<String, String> paymentData, String status) {
-        this(id, method, order, paymentData);
-        this.setStatus(status);
+    public Payment(String id, String method, Order order, Map<String, String> paymentData) {
+        this(id, method, order, paymentData, PaymentStatus.PENDING.getValue());
     }
 
     public void setStatus(String status) {
@@ -59,5 +34,23 @@ public class Payment {
         }
 
         this.status = status;
+    }
+
+    public void setOrder(Order order) {
+        if (order == null) {
+            throw new IllegalArgumentException("Order cannot be null");
+        }
+
+        this.order = order;
+    }
+
+    protected void setPaymentData(Map<String, String> paymentData) {
+        if (PaymentMethod.contains(this.method)) {
+            throw new IllegalArgumentException(
+                "Cannot set method-specific payment data for non-method-specific payment"
+            );
+        }
+
+        this.paymentData = null;
     }
 }
