@@ -225,7 +225,7 @@ class PaymentTest {
         assertEquals("a3e3e3e3-9a7f-4603-92c2-eaf529271cc9", payment.getId());
         assertEquals(PaymentMethod.VOUCHER.getValue(), payment.getMethod());
         assertEquals(paymentData, payment.getPaymentData());
-        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
+        assertEquals(PaymentStatus.WAITING_PAYMENT.getValue(), payment.getStatus());
         paymentData.clear();
     }
 
