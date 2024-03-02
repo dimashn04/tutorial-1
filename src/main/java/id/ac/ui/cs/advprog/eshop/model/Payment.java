@@ -36,7 +36,7 @@ public class Payment {
         this.status = status;
     }
 
-    public void setOrder(Order order) {
+    private void setOrder(Order order) {
         if (order == null) {
             throw new IllegalArgumentException("Order cannot be null");
         }
