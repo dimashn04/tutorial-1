@@ -155,7 +155,7 @@ class PaymentServiceImplTest {
         doReturn(bankPayment).when(paymentRepository).findById(bankPayment.getId());
         doReturn(newBankPayment).when(paymentRepository).save(any(Payment.class));
 
-        Payment result = paymentService.updatePaymentStatus(
+        Payment result = paymentService.setStatus(
             bankPayment.getId(),
             PaymentStatus.SUCCESS.getValue()
         );
@@ -183,7 +183,7 @@ class PaymentServiceImplTest {
         doReturn(voucherPayment).when(paymentRepository).findById(voucherPayment.getId());
         doReturn(newVoucherPayment).when(paymentRepository).save(any(Payment.class));
 
-        Payment result = paymentService.updatePaymentStatus(
+        Payment result = paymentService.setStatus(
             voucherPayment.getId(),
             PaymentStatus.SUCCESS.getValue()
         );
@@ -203,7 +203,7 @@ class PaymentServiceImplTest {
         doReturn(bankPayment).when(paymentRepository).findById(bankPayment.getId());
 
         assertThrows(IllegalArgumentException.class, () -> {
-            paymentService.updatePaymentStatus(bankPayment.getId(), "MEOW");
+            paymentService.setStatus(bankPayment.getId(), "MEOW");
         });
         verify(paymentRepository, times(0)).save(any(Payment.class));
     }
@@ -214,7 +214,7 @@ class PaymentServiceImplTest {
         doReturn(voucherPayment).when(paymentRepository).findById(voucherPayment.getId());
 
         assertThrows(IllegalArgumentException.class, () -> {
-            paymentService.updatePaymentStatus(voucherPayment.getId(), "MEOW");
+            paymentService.setStatus(voucherPayment.getId(), "MEOW");
         });
         verify(paymentRepository, times(0)).save(any(Payment.class));
     }
@@ -224,7 +224,7 @@ class PaymentServiceImplTest {
         doReturn(null).when(paymentRepository).findById("zczc");
 
         assertThrows(NoSuchElementException.class, () -> {
-            paymentService.updatePaymentStatus("zczc", PaymentStatus.SUCCESS.getValue());
+            paymentService.setStatus("zczc", PaymentStatus.SUCCESS.getValue());
         });
 
         verify(paymentRepository, times(0)).save(any(Payment.class));
@@ -235,7 +235,7 @@ class PaymentServiceImplTest {
         Payment payment = payments.get(1);
         doReturn(payment).when(paymentRepository).findById(payment.getId());
 
-        Payment result = paymentService.findById(payment.getId());
+        Payment result = paymentService.getPayment(payment.getId());
 
         assertEquals(payment.getId(), result.getId());
         assertEquals(payment.getMethod(), result.getMethod());
@@ -247,7 +247,7 @@ class PaymentServiceImplTest {
     void testFindByIdIfIdNotFound() {
         doReturn(null).when(paymentRepository).findById("zczc");
 
-        assertNull(paymentService.findById("zczc"));
+        assertNull(paymentService.getPayment("zczc"));
     }
 
     @Test
