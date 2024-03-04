@@ -20,7 +20,6 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Autowired
     private PaymentRepository paymentRepository;
-    @Autowired
 
     @Override
     public Payment addPayment(Order order, String method, Map<String, String> data) {
