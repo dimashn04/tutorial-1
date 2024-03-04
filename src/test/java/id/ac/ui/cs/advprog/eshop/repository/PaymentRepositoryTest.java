@@ -114,6 +114,7 @@ class PaymentRepositoryTest {
         assertSame(payment.getPaymentData(), findResult.getPaymentData());
         assertEquals(payment.getStatus(), findResult.getStatus());
         assertEquals(PaymentStatus.PENDING.getValue(), payment.getStatus());
+        assertEquals(PaymentMethod.VOUCHER.getValue(), payment.getMethod());
     }
 
     @Test
@@ -129,6 +130,7 @@ class PaymentRepositoryTest {
         assertSame(payment.getPaymentData(), findResult.getPaymentData());
         assertEquals(payment.getStatus(), findResult.getStatus());
         assertEquals(PaymentStatus.PENDING.getValue(), payment.getStatus());
+        assertEquals(PaymentMethod.BANK.getValue(), payment.getMethod());
     }
 
     @Test
@@ -202,6 +204,7 @@ class PaymentRepositoryTest {
         assertEquals(payment.getStatus(), findResult.getStatus());
         assertEquals(result.getStatus(), findResult.getStatus());
         assertEquals(PaymentStatus.PENDING.getValue(), findResult.getStatus());
+        assertEquals(PaymentMethod.VOUCHER.getValue(), findResult.getMethod());
     }
 
     @Test
@@ -240,6 +243,7 @@ class PaymentRepositoryTest {
         assertEquals(payment.getStatus(), findResult.getStatus());
         assertEquals(result.getStatus(), findResult.getStatus());
         assertEquals(PaymentStatus.PENDING.getValue(), findResult.getStatus());
+        assertEquals(PaymentMethod.BANK.getValue(), findResult.getMethod());
     }
 
     @Test
