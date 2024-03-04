@@ -3,6 +3,7 @@ package id.ac.ui.cs.advprog.eshop.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -273,5 +274,56 @@ class PaymentRepositoryTest {
 
         List<Payment> allPayments = paymentRepository.getAllPayments();
         assertEquals(4, allPayments.size());
+    }
+
+    @Test
+    void testAddPaymentDuplicateId() {
+        Payment payment = payments.get(1);
+        paymentRepository.save(payment);
+
+        Payment newPayment = new Payment(
+            payment.getId(),
+            payment.getMethod(),
+            payment.getOrder(),
+            payment.getPaymentData()
+        );
+
+        assertThrows(IllegalStateException.class, () -> {
+            paymentRepository.save(newPayment);
+        });
+    }
+
+    @Test
+    void testAddPaymentDuplicateIdVoucher() {
+        Payment payment = payments.get(2);
+        paymentRepository.save(payment);
+
+        Payment newPayment = new VoucherPayment(
+            payment.getId(),
+            payment.getMethod(),
+            payment.getOrder(),
+            payment.getPaymentData()
+        );
+
+        assertThrows(IllegalStateException.class, () -> {
+            paymentRepository.save(newPayment);
+        });
+    }
+
+    @Test
+    void testAddPaymentDuplicateIdBank() {
+        Payment payment = payments.get(3);
+        paymentRepository.save(payment);
+
+        Payment newPayment = new BankPayment(
+            payment.getId(),
+            payment.getMethod(),
+            payment.getOrder(),
+            payment.getPaymentData()
+        );
+
+        assertThrows(IllegalStateException.class, () -> {
+            paymentRepository.save(newPayment);
+        });
     }
 }
