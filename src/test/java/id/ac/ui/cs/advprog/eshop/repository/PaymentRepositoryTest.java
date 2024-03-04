@@ -3,6 +3,7 @@ package id.ac.ui.cs.advprog.eshop.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -134,116 +135,30 @@ class PaymentRepositoryTest {
     }
 
     @Test
-    void testSaveUpdate() {
+    void testSaveCreatePaymentDuplicatedId(){
         Payment payment = payments.get(1);
         paymentRepository.save(payment);
-
-        List<Product> newProducts = new ArrayList<>();
-        Product product = new Product();
-        product.setProductId("e45d7d21-fd29-4533-a569-abbe0819579a");
-        product.setProductName("Sampo Cap Bambang");
-        product.setProductQuantity(2);
-        newProducts.add(product);
-
-        Order newOrder = new Order("dbd4aff4-9a7f-4603-92c2-eaf529271cc9", 
-            newProducts, 1708560000L, "Safira Sudrajat");
-        Payment newPayment = new Payment(
-            payment.getId(),
-            payment.getMethod(),
-            newOrder,
-            null
-        );
-        Payment result = paymentRepository.save(newPayment);
-
-        Payment findResult = paymentRepository.findById(payments.get(1).getId());
-        assertEquals(payment.getId(), result.getId());
-        assertEquals(payment.getId(), findResult.getId());
-        assertEquals(newOrder, findResult.getOrder());
-        assertEquals(result.getOrder(), findResult.getOrder());
-        assertEquals(payment.getMethod(), findResult.getMethod());
-        assertEquals(result.getMethod(), findResult.getMethod());
-        assertSame(payment.getPaymentData(), findResult.getPaymentData());
-        assertEquals(result.getPaymentData(), findResult.getPaymentData());
-        assertEquals(payment.getStatus(), findResult.getStatus());
-        assertEquals(result.getStatus(), findResult.getStatus());
-        assertEquals(PaymentStatus.PENDING.getValue(), findResult.getStatus());
+        assertThrows(IllegalArgumentException.class, () -> {
+            paymentRepository.save(payment);
+        });
     }
 
     @Test
-    void testSaveUpdateVoucher() {
-        Payment payment = payments.get(2);
-        paymentRepository.save(payment);
-
-        List<Product> newProducts = new ArrayList<>();
-        Product product = new Product();
-        product.setProductId("e45d7d21-fd29-4533-a569-abbe0819579a");
-        product.setProductName("Sampo Cap Bambang");
-        product.setProductQuantity(2);
-        newProducts.add(product);
-
-        Order newOrder = new Order("dbd4aff4-9a7f-4603-92c2-eaf529271cc9", 
-            newProducts, 1708560000L, "Safira Sudrajat");
-        Map<String, String> newVoucherPaymentData = new HashMap<>();
-        newVoucherPaymentData.put("voucherCode", "ESHOP1234ABC0000");
-        Payment newPayment = new VoucherPayment(
-            payment.getId(),
-            payment.getMethod(),
-            newOrder,
-            newVoucherPaymentData
-        );
-        Payment result = paymentRepository.save(newPayment);
-
-        Payment findResult = paymentRepository.findById(payments.get(2).getId());
-        assertEquals(payment.getId(), result.getId());
-        assertEquals(payment.getId(), findResult.getId());
-        assertEquals(newOrder, findResult.getOrder());
-        assertEquals(result.getOrder(), findResult.getOrder());
-        assertEquals(payment.getMethod(), findResult.getMethod());
-        assertEquals(result.getMethod(), findResult.getMethod());
-        assertSame(result.getPaymentData(), findResult.getPaymentData());
-        assertEquals(payment.getStatus(), findResult.getStatus());
-        assertEquals(result.getStatus(), findResult.getStatus());
-        assertEquals(PaymentStatus.PENDING.getValue(), findResult.getStatus());
-        assertEquals(PaymentMethod.VOUCHER.getValue(), findResult.getMethod());
-    }
-
-    @Test
-    void testSaveUpdateBank() {
+    void testSaveCreateBankPaymentDuplicatedId() {
         Payment payment = payments.get(3);
         paymentRepository.save(payment);
+        assertThrows(IllegalArgumentException.class, () -> {
+            paymentRepository.save(payment);
+        });
+    }
 
-        List<Product> newProducts = new ArrayList<>();
-        Product product = new Product();
-        product.setProductId("e45d7d21-fd29-4533-a569-abbe0819579a");
-        product.setProductName("Sampo Cap Bambang");
-        product.setProductQuantity(2);
-        newProducts.add(product);
-
-        Order newOrder = new Order("dbd4aff4-9a7f-4603-92c2-eaf529271cc9", 
-            newProducts, 1708560000L, "Safira Sudrajat");
-        Map<String, String> newBankPaymentData = new HashMap<>();
-        newBankPaymentData.put("bankName", "BNI");
-        newBankPaymentData.put("referenceCode", "1234567890");
-        Payment newPayment = new BankPayment(
-            payment.getId(),
-            payment.getMethod(),
-            newOrder,
-            newBankPaymentData
-        );
-        Payment result = paymentRepository.save(newPayment);
-
-        Payment findResult = paymentRepository.findById(payments.get(3).getId());
-        assertEquals(payment.getId(), result.getId());
-        assertEquals(payment.getId(), findResult.getId());
-        assertEquals(newOrder, findResult.getOrder());
-        assertEquals(result.getOrder(), findResult.getOrder());
-        assertEquals(payment.getMethod(), findResult.getMethod());
-        assertEquals(result.getMethod(), findResult.getMethod());
-        assertSame(result.getPaymentData(), findResult.getPaymentData());
-        assertEquals(payment.getStatus(), findResult.getStatus());
-        assertEquals(result.getStatus(), findResult.getStatus());
-        assertEquals(PaymentStatus.PENDING.getValue(), findResult.getStatus());
-        assertEquals(PaymentMethod.BANK.getValue(), findResult.getMethod());
+    @Test
+    void testSaveCreateVoucherPaymentDuplicatedId() {
+        Payment payment = payments.get(2);
+        paymentRepository.save(payment);
+        assertThrows(IllegalArgumentException.class, () -> {
+            paymentRepository.save(payment);
+        });
     }
 
     @Test
