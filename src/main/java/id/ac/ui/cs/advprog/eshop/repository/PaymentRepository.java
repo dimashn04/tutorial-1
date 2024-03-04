@@ -12,13 +12,10 @@ public class PaymentRepository {
     private List<Payment> payments = new ArrayList<>();
 
     public Payment save(Payment payment) {
-        int i = 0;
         for (Payment p : payments) {
             if (p.getId().equals(payment.getId())) {
-                payments.set(i, payment);
-                return payment;
+                throw new IllegalArgumentException("Payment already exists");
             }
-            i++;
         }
 
         payments.add(payment);
