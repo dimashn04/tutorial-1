@@ -104,7 +104,7 @@ public class OrderController {
         Map<String, String> paymentData = new HashMap<>();
         PaymentDTO paymentDTO = new PaymentDTO();
         paymentDTO.setOrderId(orderId);
-        System.out.println(payment.getMethod());
+        paymentDTO.setMethod(payment.getMethod());
 
         if (payment.getMethod().equals(PaymentMethod.VOUCHER.getValue())) {
             if (payment.getVoucherCode() == null) {
