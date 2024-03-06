@@ -16,7 +16,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ExtendWith(SeleniumJupiter.class)
-public class PaymentControllerTest {
+public class PaymentFunctionalTest {
     @LocalServerPort
     private int serverPort;
 
