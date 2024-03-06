@@ -7,16 +7,16 @@
 </head>
 <body>
 <p>Payment ID <span th:text="${payment.id}"></span></p>
-<p>Paid for <span th:text="${paymentinfo.orderId}"></span></p>
-<p>Method : <span th:text="${paymentinfo.method}"></span></p>
-<div th:if="${paymentinfo.method=='VOUCHER'}">
-    <p th:text="${paymentinfo.voucherCode}"></p>
+<p>Paid for <span th:text="${paymentInfo.orderId}"></span></p>
+<p>Method : <span th:text="${paymentInfo.method}"></span></p>
+<div th:if="${paymentInfo.method=='VOUCHER_CODE'}">
+    <p th:text="${paymentInfo.voucherCode}"></p>
 </div>
-<div th:if="${paymentinfo.method=='BANK'}">
-    <p th:text="${paymentinfo.bankName}"></p>
-    <p th:text="${paymentinfo.referenceCode}"></p>
+<div th:if="${paymentInfo.method=='BANK'}">
+    <p th:text="${paymentInfo.bankName}"></p>
+    <p th:text="${paymentInfo.referenceCode}"></p>
 </div>
-<p th:text="${paymentinfo.method=='VOUCHER'} ? ${paymentinfo.voucherCode} : ${paymentinfo.bankName}" />
+<p th:text="${paymentInfo.method=='VOUCHER_CODE'} ? ${paymentInfo.voucherCode} : ${paymentInfo.bankName}" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

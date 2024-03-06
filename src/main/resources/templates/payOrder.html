@@ -9,16 +9,16 @@
 
 <div class="container my-2">
     <h2>Order Pay</h2>
-    <form th:action="@{/order/pay/{id}(id=${order})}" th:object="${paymentinfo}" method="post">
+    <form th:action="@{/order/pay/{orderId}(orderId=${order})}" th:object="${paymentInfo}" method="post">
         <fieldset>
             <p>Pay for <span th:text="${order}"></span></p>
             <p>Which one are you using?</p>
             <select th:field="*{method}">
-                <option th:value="'VOUCHER'" th:text="voucher"></option>
-                <option th:value="'BANK'" th:text="bank"></option>
+                <option th:value="'VOUCHER_CODE'" th:text="voucher"></option>
+                <option th:value="'BANK_TRANSFER'" th:text="bank"></option>
             </select>
             <p>If using Voucher Payment</p>
-            <input id="vouchercode" th:field="*{voucherCode}">
+            <input id="voucherCode" th:field="*{voucherCode}">
 
             <p>If using Bank Payment</p>
             <input id="referencecode" th:field="*{referenceCode}">
